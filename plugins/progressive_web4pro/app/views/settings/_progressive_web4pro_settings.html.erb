@@ -1,0 +1,21 @@
+<p><%= t :progressive_web4pro_settings %></p>
+<div class="tabular settings">
+  <p>
+    <%= setting_label :status_progressive_web4pro %>
+    <%= check_box_tag(
+      'settings[status_progressive_web4pro]',
+      true,
+      @settings['status_progressive_web4pro']
+    ) %>
+  </p>
+  <p>
+    <%= setting_label :custom_estimated_developer_time_field %>
+    <%= select_tag(
+      'settings[estimated_developer_time_field]',
+      options_for_select(
+        issue_custom_fields_list,
+        @settings['estimated_developer_time_field']
+      )
+    ) %>
+  </p>
+</div>
