@@ -7,8 +7,8 @@
 <%= ("<td></td>" * (criterias.length - level - 1)).html_safe -%>
   <% total = 0 -%>
   <% if @report.criteria.include? "issue" %>
-    <% filtered_issues = @issues.select { |i| hours_for_value.map { |x| x["issue"].to_i }.uniq.include?(i.id) } %>
-    <td><%= filtered_issues.map(&:estimated_hours).compact.sum %></td>
+    <td><%= filtered_issues(hours_for_value).map(&:estimated_hours).compact.sum %></td>
+    <td><%= estimated_hours_for_developer(hours_for_value) if progressive_web4pro_active? %></td>
   <% end %>
   <% @report.periods.each do |period| -%>
     <% sum = sum_hours(select_hours(hours_for_value, @report.columns, period.to_s)); total += sum -%>
