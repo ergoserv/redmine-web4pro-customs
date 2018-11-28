@@ -23,7 +23,7 @@
   <label for='criterias'><%= l(:button_add) %></label>: <%= select_tag('criteria[]', options_for_select([[]] + (@report.available_criteria.keys - @report.criteria).collect{|k| [l_or_humanize(@report.available_criteria[k][:label]), k]}),
                                                           :onchange => "this.form.submit();",
                                                           :style => 'width: 200px',
-                                                          :disabled => (@report.criteria.length >= 3),
+                                                          :disabled => (@report.criteria.length >= 4),
                                                           :id => "criterias") %>
      <%= link_to l(:button_clear), {:params => request.query_parameters.merge(:criteria => nil)}, :class => 'icon icon-reload' %></p>
 <% end %>
@@ -44,6 +44,7 @@
 <% columns_width = (40 / (@report.periods.length+1)).to_i %>
 <% if @report.criteria.include? "issue" %>
   <th><%= t('field_estimated_hours') %></th>
+  <th><%= t('field_estimated_time_for_developer') if progressive_web4pro_active? %></th>
 <% end %>
 <% @report.periods.each do |period| %>
   <th class="period" style="width:<%= columns_width %>%;"><%= period %></th>
@@ -59,6 +60,7 @@
   <% total = 0 -%>
   <% if @report.criteria.include? "issue" %>
     <td><%= @total_estimated_hours %></td>
+    <td><%= estimated_hours_for_developer if progressive_web4pro_active? %></td>
   <% end %>
   <% @report.periods.each do |period| -%>
     <% sum = sum_hours(select_hours(@report.hours, @report.columns, period.to_s)); total += sum -%>
