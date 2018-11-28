@@ -14,3 +14,4 @@ Redmine::Plugin.register :progressive_web4pro do
 end
 
 require 'settings_helper_patch'
+require 'timereport_helper_patch'
