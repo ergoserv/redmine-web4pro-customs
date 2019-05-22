@@ -19,6 +19,16 @@ module TimereportHelperPatch
       def progressive_web4pro_active?
         Setting['plugin_progressive_web4pro']['status_progressive_web4pro']
       end
+
+      def progressive_time_entry_restrictions_enabled?
+        Setting['plugin_progressive_web4pro']['time_entry_restrictions_enabled']
+      end
+
+      def progressive_calendar_for_time_entry_spent_on
+        return if progressive_time_entry_restrictions_enabled? && !User.current.admin?
+
+        calendar_for('time_entry_spent_on')
+      end
     end
   end
 end
