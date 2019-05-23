@@ -431,6 +431,7 @@ en:
   setting_search_results_per_page: Search results per page
   setting_attachment_extensions_allowed: Allowed extensions
   setting_attachment_extensions_denied: Disallowed extensions
+  setting_timelog_required_fields: Required fields for time logs
 
   permission_add_project: Create project
   permission_add_subprojects: Create subprojects
