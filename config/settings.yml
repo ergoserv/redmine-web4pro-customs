@@ -259,3 +259,6 @@ non_working_week_days:
   default:
   - '6'
   - '7'
+timelog_required_fields:
+  serialized: true
+  default: ''
