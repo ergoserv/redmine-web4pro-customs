@@ -1,0 +1,41 @@
+<p><%= t :progressive_web4pro_settings %></p>
+<div class="tabular settings">
+  <p>
+    <%= setting_label :status_progressive_web4pro %>
+    <%= check_box_tag(
+      'settings[status_progressive_web4pro]',
+      true,
+      @settings['status_progressive_web4pro']
+    ) %>
+  </p>
+  <p>
+    <%= setting_label :custom_estimated_developer_time_field %>
+    <%= select_tag(
+      'settings[estimated_developer_time_field]',
+      options_for_select(
+        issue_custom_fields_list,
+        @settings['estimated_developer_time_field']
+      )
+    ) %>
+  </p>
+  <p>
+    <%= setting_label :time_entry_restrictions_enabled %>
+    <%= check_box_tag(
+      'settings[time_entry_restrictions_enabled]',
+      true,
+      @settings['time_entry_restrictions_enabled']
+    ) %>
+  </p>
+  <p>
+    <%= setting_label :time_entry_allowed_past_days %>
+    <% Role.all.each do |role| %>
+      <%= select_tag(
+        "settings[time_entry_allowed_past_days_#{role.name.downcase}]",
+        options_for_select(
+          [['Any', 'any'], 0, 1, 2],
+          @settings["time_entry_allowed_past_days_#{role.name.downcase}"])) %>
+      <b><%= role.name %></b>
+      <br>
+    <% end %>
+  </p>
+</div>

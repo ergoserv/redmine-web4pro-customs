@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    errors:
+      messages:
+        invalid_spent_on_date: You are entering date for an incorrect calendar period, contact your project manager or administrator
+
+  field_estimated_time_for_developer: Estimated Time for developer
+  progressive_web4pro_settings: Progressive Web4pro Custom Settings
+
+  setting_custom_estimated_developer_time_field: Estimated Time developer field
+  setting_status_progressive_web4pro: Enabled
+  setting_time_entry_allowed_past_days: Allowed logging interval
+  setting_time_entry_restrictions_enabled: Time Entry restrictions

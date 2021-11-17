@@ -76,7 +76,10 @@ class TimelogController < ApplicationController
     scope = time_entry_scope
 
     @report = Redmine::Helpers::TimeReport.new(@project, @issue, params[:criteria], params[:columns], scope)
-
+    if @report.criteria.include? 'issue'
+      @issues = Issue.find(@report.hours.map { |x| x['issue'] }.uniq)
+      @total_estimated_hours = @issues.map(&:estimated_hours).compact.sum
+    end
     respond_to do |format|
       format.html {render :layout => !request.xhr?}
       format.csv do
