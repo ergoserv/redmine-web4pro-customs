@@ -283,6 +283,8 @@ default_users_time_zone:
   default: ""
 # encodings used to convert files content to UTF-8
 # multiple values accepted, comma separated
+default_users_hide_mail:
+  default: 1
 repositories_encodings:
   default: ''
 # encoding used to convert commit logs to UTF-8

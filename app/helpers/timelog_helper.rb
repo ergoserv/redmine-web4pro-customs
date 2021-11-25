@@ -92,6 +92,11 @@ module TimelogHelper
   def report_to_csv(report)
     Redmine::Export::CSV.generate(:encoding => params[:encoding]) do |csv|
       # Column headers
+      headers = report.criteria.collect {|criteria| l(report.available_criteria[criteria][:label]) }
+      if report.criteria.include? 'issue'
+        headers << t('field_estimated_hours')
+        headers << t('field_estimated_time_for_developer') if progressive_web4pro_active?
+      end
       headers =
         report.criteria.collect do |criteria|
           l_or_humanize(report.available_criteria[criteria][:label])
@@ -125,6 +130,10 @@ module TimelogHelper
       row << format_criteria_value(available_criteria[criteria[level]], value, false).to_s
       row += [''] * (criteria.length - level - 1)
       total = 0
+      if criteria.include?('issue')
+        row << filtered_issues(hours_for_value).map(&:estimated_hours).compact.sum
+        row << estimated_hours_for_developer(hours_for_value) if progressive_web4pro_active?
+      end
       periods.each do |period|
         sum = sum_hours(select_hours(hours_for_value, columns, period.to_s))
         total += sum

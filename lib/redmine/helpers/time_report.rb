@@ -29,7 +29,7 @@ module Redmine
         @criteria = criteria || []
         @criteria = @criteria.select{|criteria| available_criteria.has_key? criteria}
         @criteria.uniq!
-        @criteria = @criteria[0,3]
+        @criteria = @criteria[0,4]
 
         @columns = (columns && %w(year month week day).include?(columns)) ? columns : 'month'
         @scope = time_entry_scope
